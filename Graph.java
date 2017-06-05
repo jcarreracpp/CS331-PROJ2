@@ -10,6 +10,7 @@ public class Graph {
     private int[][] adjacency;
     private int nodeCount;
     private Edge[] edgeList;
+    private double ratio;
     
     //Initializes the graph object with a size value.
     public Graph(int n){
@@ -22,6 +23,7 @@ public class Graph {
     //and the method was designed to work with 0.2, 0.4, 0.6, 0.8, or 1. Other
     //values have not been tested and might cause errors.
     public void generateUnconnectedGraph(double ratio){
+        this.ratio = ratio;
         int maxEdgeThreshold = (nodeCount*(nodeCount-1))/2;
         int graphEdgeCount = (int)(ratio * maxEdgeThreshold);
         
@@ -59,6 +61,7 @@ public class Graph {
     //with 0.2, 0.4, 0.6, 0.8, or 1. Other values have not been tested and might
     //cause errors.
     public void generateConnectedGraph(double ratio) {
+        this.ratio = ratio;
         int maxEdgeThreshold = (nodeCount * (nodeCount - 1)) / 2;
         int graphEdgeCount = (int) (ratio * maxEdgeThreshold);
         int[] availi = new int[nodeCount];
@@ -92,7 +95,7 @@ public class Graph {
         //This generates new edges based on what edges were created before,
         //ensuring that every vertex is connected in some fashion.
         for (int k = 0; k < (nodeCount - 1); k++) {
-            System.out.print("(" + i + "," + j + ") ");
+
             graphEdgeCount--;
             int edge = (int) (Math.random() * 100f);
             if(edge == 0)
@@ -114,7 +117,6 @@ public class Graph {
             processAgain(graphEdgeCount);
         }
         initiateEdgeList(ratio);
-        connectedCheck();
 
     }
     
@@ -189,6 +191,7 @@ public class Graph {
     }
     
     public Edge[] getEdgeList(){
+        initiateEdgeList(ratio);
         return edgeList;
     }
     
@@ -212,6 +215,7 @@ public class Graph {
             edgeList[i].print();
             System.out.print(" ");
         }
+        System.out.println();
     }
     
     

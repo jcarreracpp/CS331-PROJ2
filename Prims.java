@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author Jorge
  */
 public class Prims {
-    private int MinCost = 0;
+    private int MinCost;
     private int[] Near;
     private int[][] adjacency;
     private Edge[] edgeList;
@@ -26,31 +26,44 @@ public class Prims {
         edgeList = new Edge[size];
     }
     
-    public Edge[] run(){
-        
-        int j;
-        
-        for(int i = 0; i < (size-1); i++){
-            j = min(i,adjacency, Near);
+    public Edge[] run() {
+        MinCost = 0;
 
-            System.out.println(i);
-            edgeList[i] = new Edge(j, Near[j], adjacency[j][Near[j]]);
-            
-            MinCost = MinCost + adjacency[i][j];
-            Near[j] = -1;
-        
-            for(int k = 0; k < size; k++){
-                if(Near[k] != -1 && adjacency[k][Near[k]] > adjacency[k][j]){
-                System.out.print("["+k+","+Near[k]+"] ");
-                    Near[k] = j;
+        int j;
+
+        for (int i = 0; i < (size - 1); i++) {
+            j = min(i, adjacency, Near);
+
+            if (adjacency[j][Near[j]] != -1) {
+                edgeList[i] = new Edge(j, Near[j], adjacency[j][Near[j]]);
+
+                MinCost = MinCost + adjacency[j][Near[j]];
+                Near[j] = -1;
+
+                for (int k = 0; k < size; k++) {
+                    if (Near[k] != -1 && adjacency[k][Near[k]] > adjacency[k][j]) {
+                        Near[k] = j;
+                    }
+
                 }
 
+            }else{
+                for(int k = 1; k < size; k++){
+                    if(Near[k] != -1)
+                        Near[k] = j;
+                }
             }
-            System.out.println();
         }
-        connectedCheck();
         return edgeList;
-        
+
+    }
+    
+    public void reinit(Graph graph){
+        adjacency = graph.getAdjacency();
+        size = graph.getSize();
+        Near = new int[size];
+        nearInitialize();
+        edgeList = new Edge[size];
     }
     
     private int min(int j,int[][] adj, int[] near){
@@ -62,7 +75,6 @@ public class Prims {
             if(near[i] != -1 &&( (adj[i][near[i]] < maxCost && adj[i][near[i]] != -1) || (near[minIndex] == -1||adj[minIndex][near[minIndex]]==0))){
                 minIndex = i;
                 maxCost = adj[minIndex][near[minIndex]];
-                System.out.println("("+i+","+near[i]+") " + maxCost + " \t" + minIndex + "\t" + near[i]);
             }
         }
         return minIndex;
