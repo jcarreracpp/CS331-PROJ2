@@ -182,14 +182,18 @@ public class Graph {
         System.out.println(connected + "!");
     }
     
+    //Returns the cost adjacency matrix.
     public int[][] getAdjacency(){
         return adjacency;
     }
     
+    //Returns the length of the graph.
     public int getSize(){
         return nodeCount;
     }
     
+    //Refactors and returns the edge list, used for kruskals to run properly and within required
+    //time complexity.
     public Edge[] getEdgeList(){
         initiateEdgeList(ratio);
         return edgeList;
@@ -225,7 +229,6 @@ public class Graph {
         System.out.println();
         printEdgeList();
         System.out.println();
-    
     }
     
 }

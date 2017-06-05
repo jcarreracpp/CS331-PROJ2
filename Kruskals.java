@@ -15,6 +15,8 @@ public class Kruskals {
     private int[] A;
     private int[] height;
     
+    //Initializes a Kruskals object. It loads the data in from the graph and prepares to
+    //perform the algorithm.
     public Kruskals(Graph graph){
         input = graph.getEdgeList();
         size = graph.getSize();
@@ -24,6 +26,7 @@ public class Kruskals {
         initializeHeight();
     }
     
+    //Performs Kruskals algorithm on the graph provided by the class constructor.
     public Edge[] run(){
         int empty = 0;
         int T = 0;
@@ -54,6 +57,7 @@ public class Kruskals {
         return result;
     }
     
+    //Re-instates the graph's original values. Kruskals is destructive to the provided edge list.
     public void reinit(Graph graph){
         input = graph.getEdgeList();
         size = graph.getSize();
@@ -64,6 +68,7 @@ public class Kruskals {
 
     }
     
+    //Returns the index of the lowest cost edge.
     private int lowestEdge(){
         int minCost = 1000;
         int minIndex = 0;
@@ -77,22 +82,27 @@ public class Kruskals {
         return minIndex;
     }
     
+    //Effectively 'deletes' an edge by making it's cost ridiculously high. The algorithm
+    //processes it as if it were deleted.
     private void deleteEdge(int i){
         input[i].setCost(1000);
     }
     
+    //Initializes the grouping array, A.
     private void initializeA(){
         for(int i = 0; i < size; i++){
             A[i] = i;
         }
     }
     
+    //Initializes the array keeping track of tree heights.
     private void initializeHeight(){
         for(int i = 0; i < size; i++){
             height[i] = 0;
         }
     }
     
+    //Find2 algorithm as described in the slides and prompt.
     private int find2(int x){
         int i = x;
         while(A[i] != i){
@@ -102,6 +112,7 @@ public class Kruskals {
         return i;
     }
     
+    //Merge3 algorithm as described in the slides and prompt.
     private void merge3(int a, int b){
         if(height[a] == height[b]){
             A[b] = a;

@@ -18,6 +18,8 @@ public class Prims {
     private Edge[] edgeList;
     private int size;
     
+    //Initializes a Prims object. Takes in data from the provided graph and prepares to
+    //perform prims algorithm on the given graph.
     public Prims(Graph graph){
         adjacency = graph.getAdjacency();
         size = graph.getSize();
@@ -26,6 +28,7 @@ public class Prims {
         edgeList = new Edge[size];
     }
     
+    //Runs Prims algorithm on the provided graph.
     public Edge[] run() {
         MinCost = 0;
 
@@ -58,6 +61,7 @@ public class Prims {
 
     }
     
+    //Re-instates the graph's original values.
     public void reinit(Graph graph){
         adjacency = graph.getAdjacency();
         size = graph.getSize();
@@ -66,6 +70,7 @@ public class Prims {
         edgeList = new Edge[size];
     }
     
+    //Finds the index of the minimum cost edge.
     private int min(int j,int[][] adj, int[] near){
         int maxCost = 1000;
         int minIndex = 0;
@@ -80,6 +85,7 @@ public class Prims {
         return minIndex;
     }
     
+    //Initializes the array, Near.
     private void nearInitialize(){
         Arrays.fill(Near, 0);
         Near[0] = -1;
