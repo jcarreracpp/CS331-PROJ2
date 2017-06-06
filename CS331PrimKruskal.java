@@ -13,6 +13,13 @@ public class CS331PrimKruskal {
     public static void main(String[] args) {
 
         test();
+        
+//        Graph byHandGraph = new Graph(10);
+//        byHandGraph.generateConnectedGraph(0.2);
+//        printAdjacency(byHandGraph.getAdjacency());
+//        System.out.println();
+//        byHandGraph.generateConnectedGraph(0.4);
+//        printAdjacency(byHandGraph.getAdjacency());
 
     }
 
@@ -29,14 +36,6 @@ public class CS331PrimKruskal {
             }
             System.out.println("");
         }
-    }
-
-    //Prints out a list of edges in an easy to read format.
-    public static void printEdge(Edge[] edgetho) {
-        for (int i = 0; i < edgetho.length - 1; i++) {
-            System.out.print("(" + edgetho[i].from() + "," + edgetho[i].to() + ") ");
-        }
-        System.out.println();
     }
 
     //Runs a full test of both connected and unconnected graphs.

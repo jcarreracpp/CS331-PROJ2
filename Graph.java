@@ -35,6 +35,8 @@ public class Graph {
                     if(Math.random() < 0.2 && graphEdgeCount > 0){
                         graphEdgeCount--;
                         int edge = (int) (Math.random()*100f);
+                        if(edge == 0)
+                            edge++;
                         adjacency[i][j] = edge;
                         adjacency[j][i] = edge;
                     } else {
@@ -132,6 +134,8 @@ public class Graph {
                             if (adjacency[i][j] < 0) {
                                 remaining--;
                                 int edge = (int) (Math.random() * 100f);
+                                if(edge == 0)
+                                    edge++;
                                 adjacency[i][j] = edge;
                                 adjacency[j][i] = edge;
                             }

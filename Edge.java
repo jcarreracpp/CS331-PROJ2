@@ -5,7 +5,7 @@ package cs331.primkruskal;
  * @author Jorge
  */
 public class Edge {
-    private int cost;
+    private int cost = 0;
     private int vertex1 = 0;
     private int vertex2 = 0;
     
